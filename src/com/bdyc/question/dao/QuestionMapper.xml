@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bdyc.question.dao.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.bdyc.question.po.Question" >
+    <id column="q_id" property="qId" jdbcType="INTEGER" />
+    <result column="q_topic" property="qTopic" jdbcType="VARCHAR" />
+    <result column="q_option" property="qOption" jdbcType="VARCHAR" />
+    <result column="q_answer" property="qAnswer" jdbcType="VARCHAR" />
+    <result column="q_img" property="qImg" jdbcType="VARCHAR" />
+    <result column="q_obligate" property="qObligate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    q_id, q_topic, q_option, q_answer, q_img, q_obligate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from question
+    where q_id = #{qId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.bdyc.question.po.Question" >
+    insert into question (q_id, q_topic, q_option, 
+      q_answer, q_img, q_obligate
+      )
+    values (#{qId,jdbcType=INTEGER}, #{qTopic,jdbcType=VARCHAR}, #{qOption,jdbcType=VARCHAR}, 
+      #{qAnswer,jdbcType=VARCHAR}, #{qImg,jdbcType=VARCHAR}, #{qObligate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bdyc.question.po.Question" >
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        q_id,
+      </if>
+      <if test="qTopic != null" >
+        q_topic,
+      </if>
+      <if test="qOption != null" >
+        q_option,
+      </if>
+      <if test="qAnswer != null" >
+        q_answer,
+      </if>
+      <if test="qImg != null" >
+        q_img,
+      </if>
+      <if test="qObligate != null" >
+        q_obligate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="qId != null" >
+        #{qId,jdbcType=INTEGER},
+      </if>
+      <if test="qTopic != null" >
+        #{qTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="qOption != null" >
+        #{qOption,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnswer != null" >
+        #{qAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="qImg != null" >
+        #{qImg,jdbcType=VARCHAR},
+      </if>
+      <if test="qObligate != null" >
+        #{qObligate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bdyc.question.po.Question" >
+    update question
+    <set >
+      <if test="qTopic != null" >
+        q_topic = #{qTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="qOption != null" >
+        q_option = #{qOption,jdbcType=VARCHAR},
+      </if>
+      <if test="qAnswer != null" >
+        q_answer = #{qAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="qImg != null" >
+        q_img = #{qImg,jdbcType=VARCHAR},
+      </if>
+      <if test="qObligate != null" >
+        q_obligate = #{qObligate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bdyc.question.po.Question" >
+    update question
+    set q_topic = #{qTopic,jdbcType=VARCHAR},
+      q_option = #{qOption,jdbcType=VARCHAR},
+      q_answer = #{qAnswer,jdbcType=VARCHAR},
+      q_img = #{qImg,jdbcType=VARCHAR},
+      q_obligate = #{qObligate,jdbcType=VARCHAR}
+    where q_id = #{qId,jdbcType=INTEGER}
+  </update>
+</mapper>
